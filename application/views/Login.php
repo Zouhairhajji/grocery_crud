@@ -7,10 +7,6 @@
         
     </head>
     <body>
-        
-        bonjour  ca va ? 
-        <hr />
-        
         <?php echo $form_login ?>
     </body>
 </html>
