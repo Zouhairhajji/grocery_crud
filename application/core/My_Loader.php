@@ -12,7 +12,7 @@ class My_Loader extends CI_Loader {
     }
 
     public function formulaire($formulaire_name) {
-        parent::library('Formulaire');
+        require_once(APPPATH . 'libraries' . DIRECTORY_SEPARATOR . 'Formulaire.php');
         require_once(APPPATH . 'formulaire' . DIRECTORY_SEPARATOR . $formulaire_name . '.php');
     }
 

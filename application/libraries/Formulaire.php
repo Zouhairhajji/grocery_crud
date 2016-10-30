@@ -7,7 +7,7 @@
  *
  * @author zouhairhajji
  */
-class Formulaire {
+abstract class Formulaire {
 
     private static $with = 'form_';
     private static $with_label = ' : ';
@@ -21,9 +21,11 @@ class Formulaire {
     private $button_reset;
     private $forced_error;
 
-    private $div_container_error = '';
+    
     private $error_prefix = '<div class="error_prefix">';
     private $error_suffix = '</div>';
+    
+    private $cursor;
     
     public function __construct() {
         $this->array_component = array();
@@ -54,62 +56,6 @@ class Formulaire {
         
     }
 
-    
-    public function set_submit($name, $value){
-        $this->button_submit = array(
-            'name'  => self::$pefix_submitButton.$name,
-            'value' => $value,
-        );
-    }
-    
-    public function set_reset($label){
-        $this->button_reset = array(
-            'name'  => self::$name_resetButton,
-            'value' => $label,
-        );
-    }
-    
-    public function render(){
-        $script = '';
-        foreach ($this->array_component as $componant) {
-            $method = self::$with.$componant["type"];
-            if($componant["label"] ==! FALSE){
-                $script .= form_label($componant["label"].self::$with_label);
-            }
-            $script .= $method($componant["code"]);
-        }
-        return $script;
-    }
-    
-    
-    
-    
-    public function render_submit(){
-        return form_submit($this->button_submit);
-    }
-    
-    public function render_reset(){
-        return form_submit($this->button_reset);
-    }
-    
-    
-    public function render_form($url = FALSE){
-        $script = '';
-        $script .= form_open($url);
-        
-        $script .= $this->render_errors();
-        
-        $script .= $this->render();
-        if(isset($this->button_submit))
-            $script .= $this->render_submit();
-        if(isset($this->button_reset))
-            $script .= $this->render_reset();
-        
-        $script .= form_close();
-        return $script;
-    }
-
-    
     public function is_submitted() {
         if(isset($this->button_submit))
             return $this->ci->input->post($this->button_submit['name']) ? TRUE : FALSE;
@@ -138,6 +84,21 @@ class Formulaire {
         }
     }
     
+    public function set_submit($name, $value){
+        $this->button_submit = array(
+            'name'  => self::$pefix_submitButton.$name,
+            'value' => $value,
+        );
+    }
+    
+    public function set_reset($label){
+        $this->button_reset = array(
+            'name'  => self::$name_resetButton,
+            'value' => $label,
+        );
+    }
+    
+    
     /**
      * La méthode permet d'ajoute une erreure personnalisée
      */
@@ -145,11 +106,30 @@ class Formulaire {
         $this->forced_error[] = $error;
     }
     
+    
+    public function init_cursor(){
+        $this->cursor = 0;
+    }
+    
+    public function next(){
+        $this->cursor += 1;
+    }
+    
+    
+    
+    
+    public function render_submit(){
+        return form_submit($this->button_submit);
+    }
+    
+    public function render_reset(){
+        return form_submit($this->button_reset);
+    }
+    
     /**
      * La méthode permet de retourner tous les erreurs de form_validation, ainsi que les custom errors
      */
     public function render_errors(){
-        
         $errors = '';
         foreach ($this->forced_error as $error) {
             $errors .= $this->error_prefix.$error.$this->error_suffix;
@@ -171,4 +151,28 @@ class Formulaire {
         $this->data[$name]= $value;
     }
 
+    
+    
+    public function get_label(){
+        $componant = $this->array_component[$this->cursor];
+        if($componant["label"] ==! false){
+            $label = $componant["label"].self::$with_label;
+            return form_label($label);
+        }else{
+            return '';
+        }
+    }
+    public function get_component(){
+        $componant = $this->array_component[$this->cursor];
+        $method = self::$with.$componant["type"];
+        return $method($componant["code"]);
+        
+        
+    }
+    
+    
+    
+    
+    
+    public abstract function render_form($url = FALSE);
 }
