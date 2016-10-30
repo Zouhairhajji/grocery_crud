@@ -1,1 +1,2 @@
-hello word
+<html><head></head><body></body>
+</html>
