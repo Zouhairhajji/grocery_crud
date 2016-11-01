@@ -20,10 +20,8 @@ $config['prefix_style'] = '<style>';
 $config['suffix_style'] = '</style>';
 
 
-$config['favicon'] = 'dist/img/favicon.ico';
-
-$config['prefix_script'] = '<scipt type="text/javascript">';
-$config['suffix_script'] = '</scipt>';
+$config['prefix_script'] = '<script type="text/javascript">';
+$config['suffix_script'] = '</script>';
 
 
 
@@ -39,29 +37,27 @@ $config['highcharts']['js'] = array();
 
 
 
-
-
         
-
+$config['favicon'] = 'dist/img/favicon.ico';
 
  
             
 $config['css_files'] = array(
     array(
         'file' => 'bootstrap.min.css',
-        'folder' => 'bootstrap/css',
+        'folder' => 'admin-lte/bootstrap/css',
     ),
     array(
         'file' => 'font-awesome.min.css',
-        'folder' => 'css',
+        'folder' => 'font-awesome/css',
     ),
     array(
         'file' => 'AdminLTE.min.css',
-        'folder' => 'dist/css',
+        'folder' => 'admin-lte/dist/css',
     ),
     array(
         'file' => '_all-skins.min.css',
-        'folder' => 'dist/css/skins',
+        'folder' => 'admin-lte/dist/css/skins',
     ),
     
 );
@@ -82,27 +78,27 @@ $config['js_down_files'] = array(
     
     array(
         'file' => 'jquery-2.2.3.min.js',
-        'folder' => 'plugins/jQuery',
+        'folder' => 'admin-lte/plugins/jQuery',
     ),
     array(
         'file' => 'bootstrap.min.js',
-        'folder' => 'bootstrap/js',
+        'folder' => 'admin-lte/bootstrap/js',
     ),
     array(
         'file' => 'jquery.slimscroll.min.js',
-        'folder' => 'plugins/slimScroll',
+        'folder' => 'admin-lte/plugins/slimScroll',
     ),
     array(
         'file' => 'fastclick.min.js',
-        'folder' => 'plugins/fastclick',
+        'folder' => 'admin-lte/plugins/fastclick',
     ),
     array(
         'file' => 'app.min.js',
-        'folder' => 'dist/js',
+        'folder' => 'admin-lte/dist/js',
     ),
     array(
         'file' => 'demo.js',
-        'folder' => 'dist/js',
+        'folder' => 'admin-lte/dist/js',
     ),
 );
 
@@ -114,13 +110,16 @@ $config['js_down_files'] = array(
 
 
 $config['custom_js'] = array(
-    'function datatablesOptions() { var option = { "orderClasses": false,  }; return option; }',
+    "function datatablesOptions() { var option = { 'orderClasses': false,  }; return option; }",
     'function afterDatatables() {  ""  }',
 );
 
 
 $config['custom_css'] = array(
-    'body' => array(
+    
+    /*'body' => array(
         'background-color' => '#fae',
     ),
+     * 
+     */
 );

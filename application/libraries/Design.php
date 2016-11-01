@@ -14,9 +14,12 @@ class Design {
         if (isset(self::$instance)) {
             return;
         }
-
+        
         self::$instance = $this;
         $this->CI = & get_instance();
+        $this->CI->load->helper('url');
+        $this->CI->load->helper('html');
+        $this->CI->load->helper('Custom_HTML');
         $this->CI->load->config(config_file);
     }
 
@@ -162,7 +165,7 @@ class Design {
         foreach ($custom_js as $js) {
             $script_js .= $prefix_js . $js . $suffix_js;
         }
-        echo $script_js;
+        return $script_js;
     }
 
     public function render_custom_css() {

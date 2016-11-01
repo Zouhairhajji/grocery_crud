@@ -118,7 +118,7 @@ abstract class Formulaire {
     }
 
     public function render_reset() {
-        return form_submit($this->button_reset);
+        return form_reset($this->button_reset);
     }
 
     /**
@@ -182,4 +182,9 @@ abstract class Formulaire {
     public abstract function render_form($url = FALSE);
 
     public abstract function init_form();
+    
+    
+    public function username_check(){
+       return TRUE;
+   }
 }

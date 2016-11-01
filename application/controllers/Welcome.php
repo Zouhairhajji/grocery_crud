@@ -10,11 +10,7 @@ class Welcome extends CI_Controller {
         $auth_form = new Authentification();
         
         
-        if($auth_form->run() === TRUE){
-            echo "form valid";
-        }else{
-            echo "form not valid";
-        }
+        $auth_form->run();
         
         
         $data['form_login'] = $auth_form->render_form();
@@ -22,4 +18,6 @@ class Welcome extends CI_Controller {
         
     }
 
+    
+    
 }
